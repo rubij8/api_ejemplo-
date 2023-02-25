@@ -10,4 +10,5 @@ module.exports = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process
     dialect: process.env.DB_ENGINE
   });
 
+  
 
