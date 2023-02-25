@@ -1,17 +1,19 @@
 // Hacer accesible variables de entorno declaradas en el archivo ".env"
 require('dotenv').config();
 
-console.log(process.env.API_PORT); 
-console.log(process.env.DB_ENGINE);
-console.log(process.env.DB_NAME);
-console.log(process.env.DB_USER);
-console.log(process.env.DB_PASS);
-console.log(process.env.DB_HOST);
-console.log(process.env.DB_POOL_MAX);
-console.log(process.env.DB_POOL_MIN);
-console.log(process.env.DB_POOL_ACQUIRE);
-console.log(process.env.DB_POOL_IDLE);
-console.log(process.env.DB_FREEZETABLENAME);
-console.log(process.env.DB_LOGGING);
-console.log(process.env.DB_SCHEMA);
-console.log(process.env.DB_TIMESTAMPS);
+
+const express = require('express');//Importar libreria, paquete o dependencia 
+const app = express();//Ejecutar libreria para crear servidor 
+const port = +process.env.API_PORT;
+  //signo de mas (+) indica que se convierten a numericos
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.get('/saludo', (req, res) => {
+    res.send('Hola Mario.... Ejemplo de ruta' );
+});
+
+app.listen(port, () => {
+  console.log(`Servido escuchando en el puerto: ${port}`);
+});
