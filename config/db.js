@@ -9,13 +9,17 @@ const {DB_NAME,
        DB_PASS,
        DB_HOST, 
        DB_PORT, 
-       DB_ENGINE
+       DB_ENGINE, 
+       DB_TIMESTAMPS
 } = process.env;
 
 module.exports = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, { 
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    dialect: process.env.DB_ENGINE
+    dialect: process.env.DB_ENGINE,
+    define: {
+        timestamps: DB_TIMESTAMPS === 'true'
+    }
 });
 
   

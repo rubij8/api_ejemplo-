@@ -26,7 +26,7 @@ app.use(express.json());
   //signo de mas (+) indica que se convierten a numericos
 //Rutas o endpoints de la REST API que estan expuestos 
 app.use('/', routerTest);
-app.use('/user', require ('./routes/users'));
+app.use('/user', require ('./routes/user'));
 
 
 //Configuración de puerto de la REST API 
