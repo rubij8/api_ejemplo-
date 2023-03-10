@@ -8,13 +8,14 @@ const routerTest = require ('./routes/test');
 
 
 const{API_PORT, DB_ENGINE} = process.env;
+
 //Conexion a la base de datos
 db.sync().then(() => {
    console.log('BD Conectada .. :)');
    console.log(`SGBD: ${DB_ENGINE.toUpperCase() }`);
 })
 .catch((error) => {
-   console.log(`Se ah encontado el siguiente error: :(${error}`);
+   console.log(`Se ha encontrado el siguiente error: :(${error}`);
 });
 
 //Parseo de JSON

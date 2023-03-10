@@ -125,10 +125,10 @@ exports.updateUser = async (req, res) => {
         
         const user = await User.findByPk(id);
 
-        console.log(user); //null
+        //console.log(user); //null
         console.log(user ? true : false); //false (evalua)
-        console.log(user); //true (evalúa e invierte valor)
-        console.log(user); //false (evalúa e invierte valor) 
+        //console.log(user); //true (evalúa e invierte valor)
+        //console.log(user); //false (evalúa e invierte valor) 
 
         if(!user) {
             return res.status(NOT_FOUND).json({
@@ -155,8 +155,37 @@ exports.updateUser = async (req, res) => {
     }
 }
 
-exports.updateEmail = (req, res) => {
-    res.send("Domicilio de Estrellita 1 actualizado ...");
+exports.updateEmail = async (req, res) => {
+    try {
+        const{ id } = req.params;
+        const {email} = req.body;
+        
+        const user = await User.findByPk(id);
+
+        //console.log(user ? true : false); //false (evalua)
+       
+        if(!user) {
+            return res.status(NOT_FOUND).json({
+                msg:`No se ha encontrado el usuario con el ID: ${ id }`, 
+                user:{}
+            });
+        }
+
+        user.email = email;
+        await user.save(); 
+
+        return res.status(OK).json({
+            msg: `El usuario ${ user.id} se ha actualizado correctamente.`
+            
+        });
+
+    }   
+
+    catch (error) {
+        return res.status(INTERNAL_SERVER_ERROR).json({
+            msg:'Ha ocurrido un error inesperado, por favor contacte con el administrador'
+        });    
+    }
 }
 exports.deleteUser = (req, res) => {
     console.log(req.params);
