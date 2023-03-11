@@ -187,8 +187,28 @@ exports.updateEmail = async (req, res) => {
         });    
     }
 }
-exports.deleteUser = (req, res) => {
-    console.log(req.params);
-    res.send("usuarios Estrellita 1 eliminado ");
+exports.deleteUser = async (req, res) => 
+{
+    try {
+        const { id } = req.params;
+        const user = await User.findByPk(id);
+
+        if(!user) {
+            return res.status(NOT_FOUND).json({
+                msg: `No se ha encontrado el usuario ${id}`
+            })
+        }
+        await user.destroy(); 
+
+        return res.status(OK).json({
+            msg: `Se ha eliminado el usuario ${ user.id} correctamente.`    
+        });
+
+    } 
+    catch (error) {
+        return res.status(INTERNAL_SERVER_ERROR).json({
+            msg:'Ha ocurrido un error inesperado, por favor contacte con el administrador'
+        }); 
+    }
 }
 
